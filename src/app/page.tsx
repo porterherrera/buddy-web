@@ -1,65 +1,128 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  Users,
+  Target,
+  MapPin,
+  DollarSign,
+  Dumbbell,
+  Bike,
+  Footprints,
+  CircleDot,
+} from "lucide-react";
+
+const steps = [
+  {
+    icon: Users,
+    title: "Pair with a friend",
+    desc: "Invite a buddy to keep each other accountable",
+  },
+  {
+    icon: Target,
+    title: "Set your commitment + penalty",
+    desc: "Choose your weekly sessions and what you'll pay if you miss",
+  },
+  {
+    icon: MapPin,
+    title: "Check in at the gym",
+    desc: "GPS location + photo proof every workout",
+  },
+  {
+    icon: DollarSign,
+    title: "Miss a session? Your friend gets paid",
+    desc: "Automatic payments keep you honest",
+  },
+];
+
+const scenarios = [
+  { icon: Dumbbell, text: "Gym 5× / week — $20 per miss" },
+  { icon: CircleDot, text: "Golf range 3× / week — $15 per miss" },
+  { icon: Footprints, text: "Morning runs 4× / week — $10 per miss" },
+  { icon: Bike, text: "Cycling 3× / week — $25 per miss" },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="flex flex-col">
+      {/* Hero */}
+      <section className="flex flex-col items-center px-6 pt-20 pb-16 text-center">
+        <h1 className="max-w-lg text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+          Miss Your Workout.{" "}
+          <span className="text-green">Pay Your Friend.</span>
+        </h1>
+        <p className="mt-6 max-w-md text-lg text-gray-400 leading-relaxed">
+          Set your weekly fitness goals. Agree on a penalty. Check in with GPS +
+          photo. Miss a session&nbsp;— money moves automatically.
+        </p>
+        <Link
+          href="/signup"
+          className="mt-10 inline-flex h-14 items-center justify-center rounded-full bg-green px-8 text-lg font-semibold text-black transition-opacity hover:opacity-90 active:scale-95"
+        >
+          Start a Buddy Challenge
+        </Link>
+      </section>
+
+      {/* How it works */}
+      <section className="mx-auto w-full max-w-2xl px-6 py-16">
+        <h2 className="mb-10 text-center text-2xl font-bold">How it works</h2>
+        <div className="grid gap-6 sm:grid-cols-2">
+          {steps.map((s, i) => (
+            <div
+              key={i}
+              className="rounded-2xl border border-card-border bg-card p-6"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-green/15 text-green">
+                <s.icon size={24} />
+              </div>
+              <p className="text-sm text-gray-500">Step {i + 1}</p>
+              <h3 className="mt-1 text-lg font-semibold">{s.title}</h3>
+              <p className="mt-2 text-sm text-gray-400">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Why it works */}
+      <section className="mx-auto w-full max-w-2xl px-6 py-16">
+        <h2 className="mb-4 text-center text-2xl font-bold">Why it works</h2>
+        <p className="mx-auto max-w-md text-center text-lg text-gray-400">
+          The <span className="font-bold text-green">$20</span> you owe your
+          friend hits different than the{" "}
+          <span className="font-bold text-gray-300">$30</span> gym membership
+          you ignore.
+        </p>
+      </section>
+
+      {/* Example scenarios */}
+      <section className="mx-auto w-full max-w-2xl px-6 py-16">
+        <h2 className="mb-8 text-center text-2xl font-bold">
+          Works for any routine
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {scenarios.map((s, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-4 rounded-xl border border-card-border bg-card p-4"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              <s.icon size={24} className="shrink-0 text-green" />
+              <span className="text-sm font-medium">{s.text}</span>
+            </div>
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="flex flex-col items-center px-6 py-20 text-center">
+        <h2 className="text-3xl font-bold">Ready to stay accountable?</h2>
+        <p className="mt-4 text-gray-400">
+          Free to use. We only take 3% of penalty payments.
+        </p>
+        <Link
+          href="/signup"
+          className="mt-8 inline-flex h-14 items-center justify-center rounded-full bg-green px-8 text-lg font-semibold text-black transition-opacity hover:opacity-90 active:scale-95"
+        >
+          Start a Buddy Challenge
+        </Link>
+      </section>
     </div>
   );
 }
